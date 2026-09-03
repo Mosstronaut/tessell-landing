@@ -1,0 +1,305 @@
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="A five-part visual collection presented in a responsive, full-screen gallery."
+    />
+    <title>Tessell — Visual Stories</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <style type="text/tailwindcss">
+      @theme {
+        --font-sans: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      }
+
+      @layer base {
+        html,
+        body {
+          height: 100%;
+          overflow: hidden;
+          background: #f3f0e9;
+        }
+
+        body {
+          color: #191917;
+        }
+      }
+
+      @layer components {
+        .gallery-section {
+          height: 100vh;
+          height: 100svh;
+          scroll-snap-align: start;
+          scroll-snap-stop: always;
+        }
+
+        .image-frame {
+          position: relative;
+          min-height: 0;
+          overflow: hidden;
+          background: #d8d4ca;
+        }
+
+        .image-frame img {
+          height: 100%;
+          width: 100%;
+          object-fit: cover;
+          transition: transform 700ms cubic-bezier(0.2, 0.75, 0.25, 1);
+        }
+
+        .image-frame:hover img {
+          transform: scale(1.035);
+        }
+
+        .image-frame {
+          cursor: pointer;
+          outline: none;
+        }
+
+        .image-frame::after {
+          content: "More information";
+          position: absolute;
+          right: 0.75rem;
+          bottom: 0.75rem;
+          padding: 0.45rem 0.7rem;
+          border-radius: 999px;
+          background: rgb(25 25 23 / 0.78);
+          color: white;
+          font-size: 0.625rem;
+          font-weight: 600;
+          letter-spacing: 0.08em;
+          text-transform: uppercase;
+          opacity: 0;
+          transform: translateY(0.25rem);
+          transition: opacity 200ms ease, transform 200ms ease;
+          backdrop-filter: blur(8px);
+        }
+
+        .image-frame:hover::after,
+        .image-frame:focus-visible::after {
+          opacity: 1;
+          transform: translateY(0);
+        }
+
+        .image-frame:focus-visible {
+          box-shadow: inset 0 0 0 3px white, inset 0 0 0 5px #191917;
+        }
+
+        .space-dialog {
+          width: min(calc(100% - 2rem), 31rem);
+          max-height: calc(100svh - 2rem);
+          margin: auto;
+          padding: 0;
+          border: 0;
+          border-radius: 1.5rem;
+          color: #191917;
+          background: #f8f6f0;
+          box-shadow: 0 24px 80px rgb(0 0 0 / 0.3);
+        }
+
+        .space-dialog::backdrop {
+          background: rgb(16 16 14 / 0.62);
+          backdrop-filter: blur(6px);
+        }
+
+        .space-dialog[open] {
+          animation: card-in 240ms cubic-bezier(0.2, 0.75, 0.25, 1);
+        }
+
+        @keyframes card-in {
+          from { opacity: 0; transform: translateY(1rem) scale(0.98); }
+          to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        html { scroll-behavior: auto; }
+        .image-frame img,
+        .image-frame::after { transition: none; }
+        .space-dialog[open] { animation: none; }
+      }
+    </style>
+  </head>
+
+  <body class="font-sans antialiased">
+    <header class="pointer-events-none fixed inset-x-0 top-0 z-50">
+      <div class="mx-auto flex w-full max-w-[1600px] items-center px-4 py-4 sm:px-6 sm:py-5 lg:px-10">
+        <a
+          href="#collection-01"
+          aria-label="Tessell home"
+          class="pointer-events-auto flex items-center gap-2.5 rounded-full bg-[#f3f0e9]/90 py-1.5 pr-4 pl-1.5 shadow-sm backdrop-blur-md"
+        >
+          <span class="grid size-8 place-items-center rounded-full bg-[#191917] text-xs font-bold text-white">T</span>
+          <span class="text-sm font-semibold tracking-[0.16em] uppercase">Tessell</span>
+        </a>
+      </div>
+    </header>
+
+    <main
+      id="gallery"
+      class="h-full snap-y snap-mandatory overflow-y-auto overscroll-y-contain"
+      aria-label="Featured collections"
+    >
+      <section id="collection-01" class="gallery-section bg-[#f3f0e9]" aria-labelledby="title-01">
+        <div class="mx-auto flex h-full w-full max-w-[1600px] flex-col px-4 pt-20 pb-14 sm:px-6 sm:pt-24 sm:pb-16 lg:px-10">
+          <div class="mb-3 flex items-end justify-between sm:mb-4">
+            <h1 id="title-01" class="text-xl font-medium tracking-tight sm:text-3xl">Coastal Silence</h1>
+            <span class="text-xs tracking-[0.2em] text-black/45">01 / 05</span>
+          </div>
+          <div class="grid min-h-0 flex-1 grid-cols-2 grid-rows-[2fr_1fr] gap-2 sm:grid-rows-2 sm:gap-3 lg:gap-4">
+            <figure class="image-frame col-span-2 rounded-t-2xl sm:col-span-1 sm:row-span-2 sm:rounded-l-3xl sm:rounded-tr-none">
+              <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1600&q=85" alt="Rocky coast beneath a hazy sky" fetchpriority="high" />
+            </figure>
+            <figure class="image-frame rounded-bl-2xl sm:rounded-bl-none sm:rounded-tr-3xl">
+              <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1000&q=85" alt="Clear ocean water meeting a pale beach" fetchpriority="high" />
+            </figure>
+            <figure class="image-frame rounded-br-2xl sm:rounded-br-3xl">
+              <img src="https://images.unsplash.com/photo-1470770841072-f978cf4d019e?auto=format&fit=crop&w=1000&q=85" alt="Still lake framed by distant mountains" loading="lazy" />
+            </figure>
+          </div>
+        </div>
+      </section>
+
+      <section id="collection-02" class="gallery-section bg-[#d9e1d8]" aria-labelledby="title-02">
+        <div class="mx-auto flex h-full w-full max-w-[1600px] flex-col px-4 pt-20 pb-14 sm:px-6 sm:pt-24 sm:pb-16 lg:px-10">
+          <div class="mb-3 flex items-end justify-between sm:mb-4">
+            <h2 id="title-02" class="text-xl font-medium tracking-tight sm:text-3xl">Verdant Forms</h2>
+            <span class="text-xs tracking-[0.2em] text-black/45">02 / 05</span>
+          </div>
+          <div class="grid min-h-0 flex-1 grid-cols-2 grid-rows-[2fr_1fr] gap-2 sm:grid-rows-2 sm:gap-3 lg:gap-4">
+            <figure class="image-frame col-span-2 rounded-t-2xl sm:col-span-1 sm:row-span-2 sm:rounded-l-3xl sm:rounded-tr-none"><img src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=1600&q=85" alt="Sunlight filtering through a deep green forest" loading="lazy" /></figure>
+            <figure class="image-frame rounded-bl-2xl sm:rounded-bl-none sm:rounded-tr-3xl"><img src="https://images.unsplash.com/photo-1473448912268-2022ce9509d8?auto=format&fit=crop&w=1000&q=85" alt="A narrow path through dense woodland" loading="lazy" /></figure>
+            <figure class="image-frame rounded-br-2xl sm:rounded-br-3xl"><img src="https://images.unsplash.com/photo-1534269222346-5a896154c41d?auto=format&fit=crop&w=1000&q=85" alt="Detailed tropical leaves" loading="lazy" /></figure>
+          </div>
+        </div>
+      </section>
+
+      <section id="collection-03" class="gallery-section bg-[#e7d7cc]" aria-labelledby="title-03">
+        <div class="mx-auto flex h-full w-full max-w-[1600px] flex-col px-4 pt-20 pb-14 sm:px-6 sm:pt-24 sm:pb-16 lg:px-10">
+          <div class="mb-3 flex items-end justify-between sm:mb-4">
+            <h2 id="title-03" class="text-xl font-medium tracking-tight sm:text-3xl">Desert Light</h2>
+            <span class="text-xs tracking-[0.2em] text-black/45">03 / 05</span>
+          </div>
+          <div class="grid min-h-0 flex-1 grid-cols-2 grid-rows-[2fr_1fr] gap-2 sm:grid-rows-2 sm:gap-3 lg:gap-4">
+            <figure class="image-frame col-span-2 rounded-t-2xl sm:col-span-1 sm:row-span-2 sm:rounded-l-3xl sm:rounded-tr-none"><img src="https://images.unsplash.com/photo-1509316785289-025f5b846b35?auto=format&fit=crop&w=1600&q=85" alt="Warm desert dunes in evening light" loading="lazy" /></figure>
+            <figure class="image-frame rounded-bl-2xl sm:rounded-bl-none sm:rounded-tr-3xl"><img src="https://images.unsplash.com/photo-1511818966892-d7d671e672a2?auto=format&fit=crop&w=1000&q=85" alt="Geometric modern architecture" loading="lazy" /></figure>
+            <figure class="image-frame rounded-br-2xl sm:rounded-br-3xl"><img src="https://images.unsplash.com/photo-1533130061792-64b345e4a833?auto=format&fit=crop&w=1000&q=85" alt="Rock formations beneath an open sky" loading="lazy" /></figure>
+          </div>
+        </div>
+      </section>
+
+      <section id="collection-04" class="gallery-section bg-[#d8dce2]" aria-labelledby="title-04">
+        <div class="mx-auto flex h-full w-full max-w-[1600px] flex-col px-4 pt-20 pb-14 sm:px-6 sm:pt-24 sm:pb-16 lg:px-10">
+          <div class="mb-3 flex items-end justify-between sm:mb-4">
+            <h2 id="title-04" class="text-xl font-medium tracking-tight sm:text-3xl">Concrete Rhythm</h2>
+            <span class="text-xs tracking-[0.2em] text-black/45">04 / 05</span>
+          </div>
+          <div class="grid min-h-0 flex-1 grid-cols-2 grid-rows-[2fr_1fr] gap-2 sm:grid-rows-2 sm:gap-3 lg:gap-4">
+            <figure class="image-frame col-span-2 rounded-t-2xl sm:col-span-1 sm:row-span-2 sm:rounded-l-3xl sm:rounded-tr-none"><img src="https://images.unsplash.com/photo-1487958449943-2429e8be8625?auto=format&fit=crop&w=1600&q=85" alt="Minimal white modern building facade" loading="lazy" /></figure>
+            <figure class="image-frame rounded-bl-2xl sm:rounded-bl-none sm:rounded-tr-3xl"><img src="https://images.unsplash.com/photo-1518005020951-eccb494ad742?auto=format&fit=crop&w=1000&q=85" alt="Repeating windows on a concrete building" loading="lazy" /></figure>
+            <figure class="image-frame rounded-br-2xl sm:rounded-br-3xl"><img src="https://images.unsplash.com/photo-1431576901776-e539bd916ba2?auto=format&fit=crop&w=1000&q=85" alt="Angular architecture against blue sky" loading="lazy" /></figure>
+          </div>
+        </div>
+      </section>
+
+      <section id="collection-05" class="gallery-section bg-[#d9d2cb]" aria-labelledby="title-05">
+        <div class="mx-auto flex h-full w-full max-w-[1600px] flex-col px-4 pt-20 pb-14 sm:px-6 sm:pt-24 sm:pb-16 lg:px-10">
+          <div class="mb-3 flex items-end justify-between sm:mb-4">
+            <h2 id="title-05" class="text-xl font-medium tracking-tight sm:text-3xl">After Dark</h2>
+            <span class="text-xs tracking-[0.2em] text-black/45">05 / 05</span>
+          </div>
+          <div class="grid min-h-0 flex-1 grid-cols-2 grid-rows-[2fr_1fr] gap-2 sm:grid-rows-2 sm:gap-3 lg:gap-4">
+            <figure class="image-frame col-span-2 rounded-t-2xl sm:col-span-1 sm:row-span-2 sm:rounded-l-3xl sm:rounded-tr-none"><img src="https://images.unsplash.com/photo-1519608487953-e999c86e7455?auto=format&fit=crop&w=1600&q=85" alt="City lights glowing at night" loading="lazy" /></figure>
+            <figure class="image-frame rounded-bl-2xl sm:rounded-bl-none sm:rounded-tr-3xl"><img src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&w=1000&q=85" alt="Colorful lights in a dark atmosphere" loading="lazy" /></figure>
+            <figure class="image-frame rounded-br-2xl sm:rounded-br-3xl"><img src="https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=1000&q=85" alt="Stars over a dark mountain peak" loading="lazy" /></figure>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <p class="pointer-events-none fixed inset-x-0 bottom-4 z-50 text-center text-[10px] font-medium tracking-[0.14em] text-black/55 uppercase sm:bottom-5">
+      © <span id="year"></span> Tessell. All rights reserved.
+    </p>
+
+    <dialog id="space-dialog" class="space-dialog" aria-labelledby="space-title">
+      <article class="p-5 sm:p-7">
+        <div class="flex items-start justify-between gap-5">
+          <div>
+            <p id="space-collection" class="mb-2 text-[10px] font-semibold tracking-[0.18em] text-black/45 uppercase"></p>
+            <h2 id="space-title" class="text-2xl font-medium tracking-tight sm:text-3xl"></h2>
+          </div>
+          <button id="close-dialog" type="button" class="grid size-9 shrink-0 cursor-pointer place-items-center rounded-full bg-black/6 text-xl leading-none transition hover:bg-black/12 focus-visible:outline-2 focus-visible:outline-offset-2" aria-label="Close ad space details">×</button>
+        </div>
+
+        <p id="space-description" class="mt-4 max-w-prose text-sm leading-6 text-black/65 sm:text-base"></p>
+        <a id="space-link" href="#" class="mt-3 inline-flex text-sm font-semibold underline decoration-black/25 underline-offset-4 transition hover:decoration-black" target="_blank" rel="noreferrer">View placement details ↗</a>
+
+        <div class="mt-7 flex items-end justify-between gap-4 border-t border-black/10 pt-5">
+          <div>
+            <p class="text-[10px] font-semibold tracking-[0.16em] text-black/45 uppercase">Price</p>
+            <p id="space-price" class="mt-1 text-xl font-semibold tabular-nums"></p>
+            <p class="mt-0.5 text-[11px] text-black/45">Latest winning bid</p>
+          </div>
+          <button id="bid-button" type="button" class="cursor-pointer rounded-full bg-[#191917] px-5 py-3 text-sm font-semibold text-white transition hover:bg-black/75 focus-visible:outline-2 focus-visible:outline-offset-2 active:scale-[0.98] sm:px-6">Bid for this space</button>
+        </div>
+      </article>
+    </dialog>
+
+    <script>
+      document.getElementById("year").textContent = new Date().getFullYear();
+
+      const dialog = document.getElementById("space-dialog");
+      const closeDialog = document.getElementById("close-dialog");
+      const spaceTitle = document.getElementById("space-title");
+      const spaceCollection = document.getElementById("space-collection");
+      const spaceDescription = document.getElementById("space-description");
+      const spaceLink = document.getElementById("space-link");
+      const spacePrice = document.getElementById("space-price");
+      const bidButton = document.getElementById("bid-button");
+      const prices = [425, 280, 315, 510, 365, 290, 640, 455, 385, 720, 495, 340, 880, 560, 475];
+
+      document.querySelectorAll(".image-frame").forEach((frame, index) => {
+        const image = frame.querySelector("img");
+        const collection = frame.closest("section").querySelector("h1, h2").textContent;
+        const position = (index % 3) + 1;
+
+        frame.tabIndex = 0;
+        frame.setAttribute("role", "button");
+        frame.setAttribute("aria-haspopup", "dialog");
+        frame.setAttribute("aria-label", `View ${collection} ad space ${position}`);
+
+        const openDetails = () => {
+          spaceCollection.textContent = `${collection} · Space ${String(position).padStart(2, "0")}`;
+          spaceTitle.textContent = `${collection} placement`;
+          spaceDescription.textContent = `A premium visual placement featuring ${image.alt.toLowerCase()}. Reserve this space to put your campaign in front of an engaged audience.`;
+          spacePrice.textContent = `$${prices[index].toLocaleString("en-US")}`;
+          spaceLink.href = `#${frame.closest("section").id}`;
+          bidButton.dataset.space = `${collection} — Space ${position}`;
+          dialog.showModal();
+        };
+
+        frame.addEventListener("click", openDetails);
+        frame.addEventListener("keydown", (event) => {
+          if (event.key === "Enter" || event.key === " ") {
+            event.preventDefault();
+            openDetails();
+          }
+        });
+      });
+
+      closeDialog.addEventListener("click", () => dialog.close());
+      dialog.addEventListener("click", (event) => {
+        if (event.target === dialog) dialog.close();
+      });
+
+      bidButton.addEventListener("click", () => {
+        const selectedSpace = bidButton.dataset.space;
+        dialog.close();
+        window.dispatchEvent(new CustomEvent("tessell:bid", { detail: { space: selectedSpace } }));
+      });
+    </script>
+  </body>
+</html>
