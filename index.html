@@ -9,10 +9,13 @@
     />
     <title>Tessell — Visual Stories</title>
 
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Host+Grotesk:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <style type="text/tailwindcss">
       @theme {
-        --font-sans: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        --font-sans: "Host Grotesk", "Helvetica Neue", Helvetica, Arial, sans-serif;
       }
 
       @layer base {
@@ -25,16 +28,47 @@
 
         body {
           color: #191917;
+          font-weight: 500;
+          text-transform: lowercase;
+        }
+
+        body * {
+          font-weight: 500 !important;
+          text-transform: lowercase !important;
         }
       }
 
       @layer components {
         .gallery-section {
+          position: relative;
+          overflow: hidden;
           height: 100vh;
           height: 100svh;
           scroll-snap-align: start;
           scroll-snap-stop: always;
+          background-color: #fff;
+          background-image:
+            linear-gradient(to right, rgb(0 0 0 / 0.14) 1px, transparent 1px),
+            linear-gradient(to bottom, rgb(0 0 0 / 0.14) 1px, transparent 1px);
+          background-position: center;
+          background-size: 24px 24px;
         }
+
+        .bauhaus-shape {
+          position: absolute;
+          z-index: 0;
+          width: calc(100vh / 3);
+          width: calc(100svh / 3);
+          height: calc(100vh / 3);
+          height: calc(100svh / 3);
+          pointer-events: none;
+        }
+
+        .shape-01 { top: 9%; right: 7%; }
+        .shape-02 { right: -4%; bottom: 8%; }
+        .shape-03 { top: 17%; left: -5%; }
+        .shape-04 { right: -12%; bottom: 5%; }
+        .shape-05 { top: 11%; left: 8%; }
 
         .image-frame {
           position: relative;
@@ -121,6 +155,12 @@
         .image-frame::after { transition: none; }
         .space-dialog[open] { animation: none; }
       }
+
+      @media (min-width: 640px) {
+        .gallery-section {
+          background-size: 32px 32px;
+        }
+      }
     </style>
   </head>
 
@@ -130,7 +170,7 @@
         <a
           href="#collection-01"
           aria-label="Tessell home"
-          class="pointer-events-auto flex items-center gap-2.5 rounded-full bg-[#f3f0e9]/90 py-1.5 pr-4 pl-1.5 shadow-sm backdrop-blur-md"
+          class="pointer-events-auto flex items-center gap-2.5"
         >
           <span class="grid size-8 place-items-center rounded-full bg-[#191917] text-xs font-bold text-white">T</span>
           <span class="text-sm font-semibold tracking-[0.16em] uppercase">Tessell</span>
@@ -143,8 +183,11 @@
       class="h-full snap-y snap-mandatory overflow-y-auto overscroll-y-contain"
       aria-label="Featured collections"
     >
-      <section id="collection-01" class="gallery-section bg-[#f3f0e9]" aria-labelledby="title-01">
-        <div class="mx-auto flex h-full w-full max-w-[1600px] flex-col px-4 pt-20 pb-14 sm:px-6 sm:pt-24 sm:pb-16 lg:px-10">
+      <section id="collection-01" class="gallery-section bg-white" aria-labelledby="title-01">
+        <svg class="bauhaus-shape shape-01" viewBox="0 0 100 100" aria-hidden="true" focusable="false">
+          <rect width="100" height="100" fill="#0165B5" />
+        </svg>
+        <div class="relative z-10 mx-auto flex h-full w-full max-w-[1600px] flex-col px-4 pt-20 pb-14 sm:px-6 sm:pt-24 sm:pb-16 lg:px-10">
           <div class="mb-3 flex items-end justify-between sm:mb-4">
             <h1 id="title-01" class="text-xl font-medium tracking-tight sm:text-3xl">Coastal Silence</h1>
             <span class="text-xs tracking-[0.2em] text-black/45">01 / 05</span>
@@ -163,8 +206,11 @@
         </div>
       </section>
 
-      <section id="collection-02" class="gallery-section bg-[#d9e1d8]" aria-labelledby="title-02">
-        <div class="mx-auto flex h-full w-full max-w-[1600px] flex-col px-4 pt-20 pb-14 sm:px-6 sm:pt-24 sm:pb-16 lg:px-10">
+      <section id="collection-02" class="gallery-section bg-white" aria-labelledby="title-02">
+        <svg class="bauhaus-shape shape-02" viewBox="0 0 100 100" aria-hidden="true" focusable="false">
+          <circle cx="50" cy="50" r="50" fill="#E30613" />
+        </svg>
+        <div class="relative z-10 mx-auto flex h-full w-full max-w-[1600px] flex-col px-4 pt-20 pb-14 sm:px-6 sm:pt-24 sm:pb-16 lg:px-10">
           <div class="mb-3 flex items-end justify-between sm:mb-4">
             <h2 id="title-02" class="text-xl font-medium tracking-tight sm:text-3xl">Verdant Forms</h2>
             <span class="text-xs tracking-[0.2em] text-black/45">02 / 05</span>
@@ -177,8 +223,11 @@
         </div>
       </section>
 
-      <section id="collection-03" class="gallery-section bg-[#e7d7cc]" aria-labelledby="title-03">
-        <div class="mx-auto flex h-full w-full max-w-[1600px] flex-col px-4 pt-20 pb-14 sm:px-6 sm:pt-24 sm:pb-16 lg:px-10">
+      <section id="collection-03" class="gallery-section bg-white" aria-labelledby="title-03">
+        <svg class="bauhaus-shape shape-03" viewBox="0 0 100 100" aria-hidden="true" focusable="false">
+          <polygon points="50,0 100,100 0,100" fill="#F0CC58" />
+        </svg>
+        <div class="relative z-10 mx-auto flex h-full w-full max-w-[1600px] flex-col px-4 pt-20 pb-14 sm:px-6 sm:pt-24 sm:pb-16 lg:px-10">
           <div class="mb-3 flex items-end justify-between sm:mb-4">
             <h2 id="title-03" class="text-xl font-medium tracking-tight sm:text-3xl">Desert Light</h2>
             <span class="text-xs tracking-[0.2em] text-black/45">03 / 05</span>
@@ -191,8 +240,11 @@
         </div>
       </section>
 
-      <section id="collection-04" class="gallery-section bg-[#d8dce2]" aria-labelledby="title-04">
-        <div class="mx-auto flex h-full w-full max-w-[1600px] flex-col px-4 pt-20 pb-14 sm:px-6 sm:pt-24 sm:pb-16 lg:px-10">
+      <section id="collection-04" class="gallery-section bg-white" aria-labelledby="title-04">
+        <svg class="bauhaus-shape shape-04" viewBox="0 0 100 100" aria-hidden="true" focusable="false">
+          <polygon points="50,0 100,50 50,100 0,50" fill="#E30613" />
+        </svg>
+        <div class="relative z-10 mx-auto flex h-full w-full max-w-[1600px] flex-col px-4 pt-20 pb-14 sm:px-6 sm:pt-24 sm:pb-16 lg:px-10">
           <div class="mb-3 flex items-end justify-between sm:mb-4">
             <h2 id="title-04" class="text-xl font-medium tracking-tight sm:text-3xl">Concrete Rhythm</h2>
             <span class="text-xs tracking-[0.2em] text-black/45">04 / 05</span>
@@ -205,8 +257,11 @@
         </div>
       </section>
 
-      <section id="collection-05" class="gallery-section bg-[#d9d2cb]" aria-labelledby="title-05">
-        <div class="mx-auto flex h-full w-full max-w-[1600px] flex-col px-4 pt-20 pb-14 sm:px-6 sm:pt-24 sm:pb-16 lg:px-10">
+      <section id="collection-05" class="gallery-section bg-white" aria-labelledby="title-05">
+        <svg class="bauhaus-shape shape-05" viewBox="0 0 100 100" aria-hidden="true" focusable="false">
+          <circle cx="50" cy="50" r="50" fill="#0165B5" />
+        </svg>
+        <div class="relative z-10 mx-auto flex h-full w-full max-w-[1600px] flex-col px-4 pt-20 pb-14 sm:px-6 sm:pt-24 sm:pb-16 lg:px-10">
           <div class="mb-3 flex items-end justify-between sm:mb-4">
             <h2 id="title-05" class="text-xl font-medium tracking-tight sm:text-3xl">After Dark</h2>
             <span class="text-xs tracking-[0.2em] text-black/45">05 / 05</span>
